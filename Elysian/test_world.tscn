@@ -1,0 +1,56 @@
+[gd_scene load_steps=10 format=3 uid="uid://g5pme5qhrjbi"]
+
+[ext_resource type="Texture2D" uid="uid://c7ommxasvfi85" path="res://ElysianAssets/Textures/Ground037_1K-JPG/Ground037_1K-JPG_Color.jpg" id="1_02t4x"]
+[ext_resource type="PackedScene" uid="uid://cw7uix82id8o4" path="res://player.tscn" id="2_jlg3w"]
+[ext_resource type="PackedScene" uid="uid://ce1cg1peqqabu" path="res://Items/RailroadHammer/railroad_hammer.tscn" id="3_v76wh"]
+[ext_resource type="PackedScene" uid="uid://dprbaqe3logje" path="res://ElysianAssets/WorldInteractables/Door/door.tscn" id="4_snian"]
+[ext_resource type="PackedScene" uid="uid://b2adb8yv4bv8" path="res://ElysianAssets/WorldInteractables/Handcar/hand_car_lobby_path.tscn" id="5_io8lu"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_np3ei"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_6d3pk"]
+sky_material = SubResource("ProceduralSkyMaterial_np3ei")
+
+[sub_resource type="Environment" id="Environment_mbu8s"]
+background_mode = 2
+sky = SubResource("Sky_6d3pk")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y3j0j"]
+albedo_texture = ExtResource("1_02t4x")
+uv1_scale = Vector3(15, 15, 15)
+
+[node name="TestWorld" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mbu8s")
+
+[node name="Player" parent="." instance=ExtResource("2_jlg3w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="Baseplate" type="CSGBox3D" parent="."]
+use_collision = true
+collision_layer = 9
+size = Vector3(75, 1, 75)
+material = SubResource("StandardMaterial3D_y3j0j")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-4.03841e-08, 0.382683, -0.92388, 1.67276e-08, 0.92388, 0.382683, 1, 0, -4.37114e-08, -23, 11, 0)
+light_energy = 0.5
+
+[node name="BoxObstacle" type="CSGBox3D" parent="." groups=["interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2.5, 0)
+use_collision = true
+size = Vector3(1, 1, 5)
+
+[node name="RailroadHammer" parent="." instance=ExtResource("3_v76wh")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -6.30785, 0.75, 6.36977)
+
+[node name="Door" parent="." instance=ExtResource("4_snian")]
+transform = Transform3D(-0.65, 0, 9.81473e-08, 0, 0.65, 0, -9.81473e-08, 0, -0.65, 0, 0.5, 10)
+
+[node name="PathScene" parent="." instance=ExtResource("5_io8lu")]
+transform = Transform3D(-0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, -0.866025, 11.151, 0.5, -1.75044)

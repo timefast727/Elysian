@@ -1,0 +1,91 @@
+[gd_scene load_steps=12 format=3 uid="uid://cfkip8hwerlni"]
+
+[ext_resource type="ArrayMesh" uid="uid://fu2hmjcjm2u8" path="res://ElysianAssets/WorldInteractables/Handcar/Base.res" id="1_2eqjg"]
+[ext_resource type="Script" path="res://ElysianAssets/WorldInteractables/Handcar/hand_car.gd" id="1_c2gum"]
+[ext_resource type="ArrayMesh" uid="uid://dw1jmofn7lhjw" path="res://ElysianAssets/WorldInteractables/Handcar/WheelsBack.res" id="2_ov2ua"]
+[ext_resource type="ArrayMesh" uid="uid://hvxogjojan2l" path="res://ElysianAssets/WorldInteractables/Handcar/WheelsFront.res" id="3_3k77i"]
+[ext_resource type="ArrayMesh" uid="uid://dr8rapiqkc55r" path="res://ElysianAssets/WorldInteractables/Handcar/MiddlePiece.res" id="4_u0que"]
+[ext_resource type="ArrayMesh" uid="uid://b1sxevy1m4god" path="res://ElysianAssets/WorldInteractables/Handcar/Handles.res" id="5_blckh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mj71w"]
+size = Vector3(4.1, 0.95, 5.7)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c58a1"]
+size = Vector3(0.85, 1.375, 1.65)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7dk03"]
+size = Vector3(0.4, 0.15, 2.85)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vo543"]
+size = Vector3(2, 0.15, 0.15)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_flgga"]
+size = Vector3(4.1, 2, 5.7)
+
+[node name="Handcar" type="Node3D"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, -0.75, 0)
+script = ExtResource("1_c2gum")
+eject_text = "Get off: \"RMB\""
+
+[node name="HandcarBody" type="CharacterBody3D" parent="."]
+
+[node name="CollisionShapeBase" type="CollisionShape3D" parent="HandcarBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.54643, 0)
+shape = SubResource("BoxShape3D_mj71w")
+
+[node name="CollisionShapeMiddlePiece" type="CollisionShape3D" parent="HandcarBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6875, 0)
+shape = SubResource("BoxShape3D_c58a1")
+
+[node name="CollisionShapeMiddlePiece2" type="CollisionShape3D" parent="HandcarBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.3, 0)
+shape = SubResource("BoxShape3D_7dk03")
+
+[node name="CollisionShapeHandlesFront" type="CollisionShape3D" parent="HandcarBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.3, -1.5)
+shape = SubResource("BoxShape3D_vo543")
+
+[node name="CollisionShapeHandlesBack" type="CollisionShape3D" parent="HandcarBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.3, 1.5)
+shape = SubResource("BoxShape3D_vo543")
+
+[node name="MeshInstancesNode" type="Node3D" parent="HandcarBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Base" type="MeshInstance3D" parent="HandcarBody/MeshInstancesNode"]
+mesh = ExtResource("1_2eqjg")
+
+[node name="MiddlePiece" type="MeshInstance3D" parent="HandcarBody/MeshInstancesNode"]
+mesh = ExtResource("4_u0que")
+
+[node name="WheelsBackOrigin" type="Node3D" parent="HandcarBody/MeshInstancesNode"]
+transform = Transform3D(1, 7.10543e-15, -2.98023e-08, 0, -1, -1.50996e-07, -2.98023e-08, 1.50996e-07, -1, 2.98023e-08, 1.5, 1.35)
+
+[node name="WheelsBack" type="MeshInstance3D" parent="HandcarBody/MeshInstancesNode/WheelsBackOrigin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -1.35)
+mesh = ExtResource("2_ov2ua")
+skeleton = NodePath("../..")
+
+[node name="WheelsFrontOrigin" type="Node3D" parent="HandcarBody/MeshInstancesNode"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -1.35)
+
+[node name="WheelsFront" type="MeshInstance3D" parent="HandcarBody/MeshInstancesNode/WheelsFrontOrigin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 1.35)
+mesh = ExtResource("3_3k77i")
+skeleton = NodePath("../..")
+
+[node name="HandlesOrigin" type="Node3D" parent="HandcarBody/MeshInstancesNode"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.28571, 0)
+
+[node name="Handles" type="MeshInstance3D" parent="HandcarBody/MeshInstancesNode/HandlesOrigin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.28571, 0)
+mesh = ExtResource("5_blckh")
+skeleton = NodePath("../..")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShapeMain" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.02143, 0)
+shape = SubResource("BoxShape3D_flgga")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

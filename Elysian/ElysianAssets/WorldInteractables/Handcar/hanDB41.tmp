@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2adb8yv4bv8"]
+
+[ext_resource type="Script" path="res://ElysianAssets/WorldInteractables/Handcar/hand_car_lobby_path.gd" id="1_7uvg7"]
+[ext_resource type="PackedScene" uid="uid://cfkip8hwerlni" path="res://ElysianAssets/WorldInteractables/Handcar/hand_car.tscn" id="2_rcjct"]
+
+[sub_resource type="Curve3D" id="Curve3D_voq1m"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32, 0, 0),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[node name="HandcarLobbyPath" type="Node3D"]
+script = ExtResource("1_7uvg7")
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_voq1m")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(-4.371e-08, 0, -0.999974, 0, 0.999973, 0, 0.999968, 0, -4.37102e-08, 0, 0, 0)
+
+[node name="HandCar" parent="Path3D/PathFollow3D" instance=ExtResource("2_rcjct")]

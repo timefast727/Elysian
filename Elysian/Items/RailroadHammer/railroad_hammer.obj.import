@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://duybtuk1ew88e"
+path="res://.godot/imported/railroad_hammer.obj-c1eaa6bb2b4d7008ad7a260f0f65cf1c.mesh"
+
+[deps]
+
+files=["res://.godot/imported/railroad_hammer.obj-c1eaa6bb2b4d7008ad7a260f0f65cf1c.mesh"]
+
+source_file="res://Items/RailroadHammer/railroad_hammer.obj"
+dest_files=["res://.godot/imported/railroad_hammer.obj-c1eaa6bb2b4d7008ad7a260f0f65cf1c.mesh", "res://.godot/imported/railroad_hammer.obj-c1eaa6bb2b4d7008ad7a260f0f65cf1c.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

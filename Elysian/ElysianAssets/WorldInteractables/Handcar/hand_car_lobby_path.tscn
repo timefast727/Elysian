@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2adb8yv4bv8"]
+
+[ext_resource type="Script" path="res://ElysianAssets/WorldInteractables/Handcar/hand_car_lobby_path.gd" id="1_7uvg7"]
+[ext_resource type="PackedScene" uid="uid://cfkip8hwerlni" path="res://ElysianAssets/WorldInteractables/Handcar/hand_car.tscn" id="2_rcjct"]
+
+[sub_resource type="Curve3D" id="Curve3D_voq1m"]
+_data = {
+"points": PackedVector3Array(-7.70092, 0, -0.686418, 7.70092, 0, 0.686418, 7.99743, 0, -0.00398089, -3.28336, 0, 1.13173, 3.28336, 0, -1.13173, 17.9857, 0, -8.03152, -3.89294, 0, -1.30265, 3.89294, 0, 1.30265, 29.9584, 0, -7.00681, 0, 0, -4.5, 0, 0, 4.5, 36.7176, 0, 2.60778, 4.8875, 0, 0.075, -4.8875, 0, -0.075, 28.1219, 0, 9.62282, 6.25, 0, 0, -6.25, 0, 0, 15.556, 0, 4.3257, 5, 0, -0.125, -5, 0, 0.125, 3.00851, 0, 13.6048, 3.875, 0, 4.125, -3.875, 0, -4.125, -11.25, 0, 8.75, -7.18429, 0, -0.352017, 7.18429, 0, 0.352017, -7.68279, 0, -6.30429, -3.875, 0, 0, 3.875, 0, 0, 7.99743, 0, -0.00398089),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 10
+
+[node name="HandcarLobbyPath" type="Node3D"]
+script = ExtResource("1_7uvg7")
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_voq1m")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(-0.0621479, 0, -0.697236, 0, 0.7, 0, 0.697236, 0, -0.0621479, 7.99743, 0, -0.00398089)
+
+[node name="HandCar" parent="Path3D/PathFollow3D" instance=ExtResource("2_rcjct")]
+transform = Transform3D(1, 0, -7.45058e-09, 6.98492e-10, 1, -1.13505e-09, -7.45058e-09, 6.57747e-09, 1, 0, -1.05, 0)

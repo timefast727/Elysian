@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://dprbaqe3logje"]
+
+[ext_resource type="ArrayMesh" uid="uid://dbdk7gplyd6uq" path="res://ElysianAssets/WorldInteractables/Door/temp_door.obj" id="1_2bosc"]
+[ext_resource type="Script" path="res://ElysianAssets/WorldInteractables/Door/door.gd" id="1_bjoup"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1c7eu"]
+points = PackedVector3Array(1.06344, 4.03165, 0.108726, -1.03175, -0.0317454, -0.0817452, -1.03175, -0.0317454, 0.108726, -1.03175, 4.03165, -0.0817452, 1.06344, -0.0317454, -0.0817452, 1.06344, -0.0317454, 0.108726, -1.03175, 4.03165, 0.108726, 1.06344, 4.03165, -0.0817452)
+
+[sub_resource type="Animation" id="Animation_bv1sn"]
+resource_name = "door_open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hinge:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1.4399, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7rv2a"]
+_data = {
+"door_open": SubResource("Animation_bv1sn")
+}
+
+[node name="Door" type="Node3D"]
+transform = Transform3D(0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, 0.7, 0, 0)
+script = ExtResource("1_bjoup")
+
+[node name="Hinge" type="Node3D" parent="."]
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, -1, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Hinge" groups=["interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Hinge/StaticBody3D"]
+layers = 4
+mesh = ExtResource("1_2bosc")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hinge/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_1c7eu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7rv2a")
+}
